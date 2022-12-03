@@ -1,22 +1,30 @@
 import java.util.*;
 
 public class TwoStringsClose {
+    public static void main(String[] args) {
+        String input1 = "cabbba";
+        String input2 = "abbccc";
 
-    public boolean closeStrings(String word1, String word2) {
+        boolean findCloseStrings = closeStrings(input1, input2);
+
+        System.out.println(findCloseStrings);
+    }
+
+    public static boolean closeStrings(String word1, String word2) {
         String[] word1Arr = word1.split("");
         String[] word2Arr = word2.split("");
 
-        boolean result = false;
+        boolean result;
 
-        HashMap<String, Integer> setA = new HashMap();
-        HashMap<String, Integer> setB = new HashMap();
+        HashMap<String, Integer> setA = new HashMap<>();
+        HashMap<String, Integer> setB = new HashMap<>();
 
-        for (int i = 0; i < word1Arr.length; i++) {
-            increamentvalue(setA, word1Arr[i]);
+        for (String s : word1Arr) {
+            incrementalism(setA, s);
         }
 
-        for (int i = 0; i < word2Arr.length; i++) {
-            increamentvalue(setB, word2Arr[i]);
+        for (String s : word2Arr) {
+            incrementalism(setB, s);
         }
 
         if (word1Arr.length == word2Arr.length) {
@@ -27,13 +35,7 @@ public class TwoStringsClose {
         return result;
     }
 
-    public static<K> void increamentvalue(Map<K, Integer> map, K key) {
-        Integer count = map.get(key);
-
-        if (count == null) {
-            map.put(key, 1);
-        } else {
-            map.put(key, count + 1);
-        }
+    public static<K> void incrementalism(Map<K, Integer> map, K key) {
+        map.merge(key, 1, Integer::sum);
     }
 }
