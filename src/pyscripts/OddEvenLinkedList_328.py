@@ -14,17 +14,29 @@ class Solution:
         if head == None:
             return None
         
-        result = ListNode(head.val)
-        result_tail = ListNode(result.val)
+        oddresult = ListNode(head.val)
+        evenresult = ListNode(head.next.val)
+        
+        result_tail = oddresult
 
-        while (oddCount != None and oddCount.next != None):
+        while (oddCount.next != None and evenCount.next.next != None):
             odd = oddCount.next.next.val
             oddCount = oddCount.next.next
             
             result_tail.next = ListNode(odd)
             result_tail = result_tail.next
             
+        result_tail = evenresult
+        
+        while (evenCount.next != None and evenCount.next.next != None):
+            even = evenCount.next.next.val
+            evenCount = evenCount.next.next
             
+            result_tail.next = ListNode(even)
+            result_tail = result_tail.next
+            
+        result = ListNode(oddresult)
+        result.next = ListNode(evenresult)
 
         return result
     
