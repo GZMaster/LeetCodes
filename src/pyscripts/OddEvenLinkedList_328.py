@@ -7,38 +7,42 @@ class ListNode:
 
 class Solution:
     def oddEvenList(self, head: ListNode) -> ListNode:
+        if head == None:
+            return None
+        
+        if head.next == None:
+            return head
+        
         oddCount = head
         evenCount = head
         evenCount = evenCount.next
         
-        if head == None:
-            return None
-        
-        oddresult = ListNode(head.val)
-        evenresult = ListNode(head.next.val)
-        
-        result_tail = oddresult
+        oddarr = [oddCount.val] 
+        evenarr = [evenCount.val]
 
-        while (oddCount.next != None and evenCount.next.next != None):
+        while (oddCount.next != None and oddCount.next.next != None):
             odd = oddCount.next.next.val
             oddCount = oddCount.next.next
             
-            result_tail.next = ListNode(odd)
-            result_tail = result_tail.next
+            oddarr = oddarr + [odd]
             
-        result_tail = evenresult
         
         while (evenCount.next != None and evenCount.next.next != None):
             even = evenCount.next.next.val
             evenCount = evenCount.next.next
             
-            result_tail.next = ListNode(even)
-            result_tail = result_tail.next
+            evenarr = evenarr + [even]
             
-        result = ListNode(oddresult)
-        result.next = ListNode(evenresult)
+        result = oddarr + evenarr
+        
+        output = ListNode(result[0])
+        output_tail = output
+        
+        for i in range(1, len(result)):
+            output_tail.next = ListNode(result[i])
+            output_tail = output_tail.next
 
-        return result
+        return output
     
     
 input = ListNode(1)
@@ -46,6 +50,9 @@ input.next = ListNode(2)
 input.next.next = ListNode(3)
 input.next.next.next = ListNode(4)
 input.next.next.next.next = ListNode(5)
+input.next.next.next.next.next = ListNode(6)
+input.next.next.next.next.next.next = ListNode(7)
+input.next.next.next.next.next.next.next = ListNode(8)
 
 if __name__ == '__main__':
     s = Solution()
