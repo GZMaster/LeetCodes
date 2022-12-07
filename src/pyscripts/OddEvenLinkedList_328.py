@@ -8,18 +8,33 @@ class ListNode:
 class Solution:
     def oddEvenList(self, head: ListNode) -> ListNode:
         oddCount = head
-        evenCount = head.next
-
+        evenCount = head
+        evenCount = evenCount.next
+        
         if head == None:
             return None
+        
+        result = ListNode(head.val)
+        result_tail = ListNode(result.val)
 
-        output = head
+        while (oddCount != None and oddCount.next != None):
+            odd = oddCount.next.next.val
+            oddCount = oddCount.next.next
+            
+            result_tail.next = ListNode(odd)
+            result_tail = result_tail.next
+            
+            
 
-        while (oddCount.next != None and evenCount.next != None):
-            oddCount.next = oddCount.next.next
-            evenCount.next = evenCount.next.next
+        return result
+    
+    
+input = ListNode(1)
+input.next = ListNode(2)
+input.next.next = ListNode(3)
+input.next.next.next = ListNode(4)
+input.next.next.next.next = ListNode(5)
 
-        output = oddCount
-        output.next = evenCount
-
-        return output
+if __name__ == '__main__':
+    s = Solution()
+    print(s.oddEvenList(input))
