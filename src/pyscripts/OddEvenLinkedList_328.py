@@ -10,6 +10,9 @@ class Solution:
         if head == None:
             return None
         
+        if head.next == None:
+            return head
+        
         oddCount = head
         evenCount = head
         evenCount = evenCount.next
