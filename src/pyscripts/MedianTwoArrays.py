@@ -8,7 +8,7 @@ class Solution:
         if len(nums) == 1:
             return nums[0]
         
-        if (len(nums) % 2 == 0): #[1, 2, 3, 5]
+        if (len(nums) % 2 == 0):
             i = (len(nums) // 2)
             return (nums[i] + nums[i - 1])/2
              
